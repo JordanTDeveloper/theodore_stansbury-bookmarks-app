@@ -220,6 +220,14 @@ const render = function(){
                 return item.rating == bookmark.ratingNumber
             }
         })
+
+        if (theList.length === 0){
+            $('.bookmarks-list').addClass('hidden');
+        }
+        else {
+            $('.bookmarks-list').removeClass('hidden');
+        }
+
         $('#main-container').empty();
         $('.bookmarks-list').html(makeBookmarkList(booksFilter));
     }
