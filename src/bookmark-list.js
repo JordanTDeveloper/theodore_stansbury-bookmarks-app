@@ -8,7 +8,7 @@ const showBookmark = function(bookmarkList, showDescription){
 
     if(!showDescription) {
         return `
-        <li class="js-mark-element ${bookmarks.rating} hidden" data-mark-id="${bookmarks.id}">
+        <li class="js-mark-element" data-mark-id="${bookmarks.id}">
         <div class="title-container">
             <span class="mark-title">${bookmarks.title}</span>
         </div>
@@ -19,15 +19,15 @@ const showBookmark = function(bookmarkList, showDescription){
         `;
     } else  {
         return `    
-            <li class="js-mark-element ${bookmarks.rating} js-mark-element-show hidden" data-mark-id="${bookmarks.id}">
+            <li class="js-mark-element" data-mark-id="${bookmarks.id}">
                 <div class="bookmark-list-desc">
-                    <span class="top-box-description">
+                    
                         <span class="mark-title"><h3>${bookmarks.title}</h3></span>
-                        
+                        <hr>
                         <span class="mark-description">
                             <p>${bookmarks.desc}</p>
                         </span>
-                    </span>
+                        
                         <br>
                         <span class="mark-url">
                         <a href="${bookmarks.url}" target="_blank">Visit website</a>
@@ -86,11 +86,16 @@ const makeBookmarkList = function(theList){
 // Event Handlers
 
 const handleFilterBookmark = function(){    
-    $('#ratings-filter').on('click', function(evt){
+    $('#header-container').on('click', '#ratings-filter' ,function(evt){
         evt.preventDefault();
         let rating = $('#ratings-filter option:selected').val();
         bookmark.ratingNumber = rating;
-        bookmark.ratingFilter = true;   
+        
+        if (bookmark.ratingNumber !== 0){
+            bookmark.ratingFilter = true;
+        }else{
+            bookmark.ratingFilter = false;
+        }
         render();
     })
 }
@@ -139,20 +144,15 @@ const handleCancelAdding = function(){
 }
 
 const handleClickedBookmark = function(){
-    $('.bookmarks-list').on('click', '.js-mark-element', function(evt){
+    $('.bookmarks-list').on('click', '.mark-title', function(evt){
         evt.preventDefault();
         const id = getIdFromElement(evt.currentTarget);
-        bookmark.selectedId = id;
-        render();
-    })
-}
 
-const handleUnclickedBookmark = function(){
-    $('.bookmarks-list').on('click', '.js-mark-element-show', function(evt){
-        evt.preventDefault();
-        const id = getIdFromElement(evt.currentTarget);
         if (bookmark.selectedId === id){
             bookmark.selectedId = '';
+        }
+        else{
+            bookmark.selectedId = id;
         }
         render();
     })
@@ -196,8 +196,7 @@ const render = function(){
     renderError();
 
     let theList = [...bookmark.marks];
-    
-    
+
     if (bookmark.adding === false && bookmark.ratingFilter === false){
         if(theList.length === 0){
             $('.bookmarks-list').addClass('hidden');
@@ -207,27 +206,22 @@ const render = function(){
 
         $('#main-container').empty();
         $('.bookmarks-list').html(makeBookmarkList(theList));
-        $('.bookmarks-list').find('li').removeClass('hidden');
     }
     else if (bookmark.adding === true){
         $('#main-container').html(bookmarkPage());
         bookmark.adding = false;
     }
     else if (bookmark.ratingFilter === true){
-        if(theList.length === 0){
-            $('.bookmarks-list').addClass('hidden');
-        }else{
-            $('.bookmarks-list').removeClass('hidden');
-        }
-
+        let booksFilter = theList.filter(function (item) {
+            if (bookmark.ratingNumber == 0) {
+                return theList
+            }
+            else {
+                return item.rating == bookmark.ratingNumber
+            }
+        })
         $('#main-container').empty();
-        $('.bookmarks-list').html(makeBookmarkList(theList));
-
-        if (bookmark.ratingNumber > 0){
-            $('#bookmarks-list-container').find(`.${bookmark.ratingNumber}`).removeClass('hidden');
-        }else{
-            $('.bookmarks-list').find('li').removeClass('hidden');
-        }
+        $('.bookmarks-list').html(makeBookmarkList(booksFilter));
     }
 }
 
@@ -245,7 +239,6 @@ const bindEventListeners = function(){
     handleError();
     handleAddBookmark();
     handleClickedBookmark();
-    handleUnclickedBookmark();
     handleDeleteBookmark();
     handleBookmarkPage();
     handleFilterBookmark();
