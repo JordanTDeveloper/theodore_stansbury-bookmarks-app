@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./src/index.css">
+        <title>The Bookmarks App</title>
+    </head>
+
+
+
+    <body>
+
+        <div id="title-container">
+            <h1>the Bookmarks</h1>
+        </div>
+        <div id="header-container">            
+                <span class="to-add-box">
+                    <button type="button" id="to-add-button">Add a bookmark</button>
+                </span>
+                <br>
+                <span class="filter-box">
+                    <label for="ratings-filter" id="label-filter">Filter:</label>
+                    <select name="ratings-filter" id="ratings-filter">
+                        <option value="0">*All*</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="4">Four</option>
+                        <option value="5">Five</option>
+                    </select>
+                </span>
+        </div>
+    <main>
+        <div id="main-container"></div>
+        
+        <div id="bookmarks-list-container">
+            <ul class="bookmarks-list"></ul>
+        </div>
+
+        <div id="error-container"></div>
+
+    </main>
+    </body>
+</html>
+
+
+<!-- App created by Theodore Stansbury -->

@@ -1,0 +1,162 @@
+
+body {
+    background-image: url('images/browser-bookmarks.jpg');
+    background-repeat: no-repeat;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Header  */
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#header-container {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.to-add-box {
+    margin: 5px 30px;
+}
+
+.filter-box {
+    margin: 5px 30px;
+}
+
+#ratings-filter {
+    position: relative;
+    display: inline-block;
+}
+
+#ratings-filter option {
+    position: absolute;
+    background-color: #c0b6b6;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+}
+
+
+/* List */
+
+
+#bookmarks-list-container {
+    display: block;
+    justify-content: center;
+}
+
+.bookmarks-list {
+    padding: 20px;
+    background: #3399ff;
+    opacity: 0.90;
+}
+
+.bookmarks-list li {
+    background: #cce5ff;
+    margin: 10px;
+    text-align: center;
+    list-style-type: none;
+    border-radius: 5px;
+}
+
+.top-box-description {
+    display: block;
+    justify-content: center;
+}
+
+span.mark-title {
+    font-family: Tahoma, sans-serif;
+}
+
+span.mark-rating {
+    font-size: 14px;
+    font-family: monospace;
+}
+
+.delete-button {
+    margin-top: 10px ;
+}
+
+.rating-container {
+    margin: 8px 0;
+}
+
+p {
+    font-size: 16px;
+}
+
+a:link, a:visited {
+    background-color: #882ef0;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+  
+a:hover, a:active {
+    background-color: red;
+}
+
+
+/* Add bookmark */
+
+#add-bookmark-container {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    border-color: orange  #3399ff orange #3399ff;
+    border-style: solid;
+    background-color: #3399ff;
+}
+
+
+
+/* Desktop View */
+
+@media all and (min-width: 600px) {
+
+    body {
+        background: #3399ff
+    }
+
+    .bookmarks-list {
+        text-align: center;
+        margin: 35px;
+        padding: 20px;
+        background-image: url('images/browser-bookmarks.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        opacity: 0.90;
+    }
+
+    .bookmarks-list li {
+        display: inline-block;
+        justify-content: center;
+        background: #cce5ff;
+        margin: 30px;
+        padding: 20px;
+        text-align: center;
+        list-style-type: none;
+        border-radius: 5px;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    span.mark-rating {
+        font-size: 16px;
+        font-family: monospace;
+    }
+
+}
